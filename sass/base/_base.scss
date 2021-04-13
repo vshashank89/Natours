@@ -1,0 +1,52 @@
+/* because these are the basic definitons of the entire project*/
+
+*,      /*Universal selector selects only real elements so for pseudo elements we use ::after , ::before:   */
+*::after,
+*::before {
+    margin: 0;
+    padding: 0;
+    box-sizing: inherit;
+}
+
+html {
+    // This defines what 1rem is
+    font-size: 62.5%;   /*1 rem = 10px; 10px/16px = 62.5% , 
+    Putting root font-size: 10px; is bad practise instead put in percentage of default browser font size(16px)*/
+
+    // Old Traditional Way of writing media queries.
+    /*@media (max-width: 600px) {
+        font-size: 50%;
+    } */
+
+    @include respond(tab-land) { // width < 1200?
+        font-size: 56.25%; //1 rem = 9px, 9/16 = 50%
+    }
+
+    @include respond(tab-port) { // width < 900?
+        font-size: 50%; //1 rem = 8px, 8/16 = 50%
+    }
+     
+    /*@include respond(phone) { This is not necessary because all css rules in tab-port will apply to this also.
+        font-size: 50%;
+    } */
+    
+    @include respond(big-desktop) {
+        font-size: 75%; //1rem = 12, 12/16
+    }
+}
+
+body {
+    box-sizing: border-box; /*is to change the BoxModel so that borders and paddings are no longer added to the total width or height of box.
+    The width and height properties (and min/max properties) includes content, padding and border*/
+    
+    padding: 3rem;
+
+    @include respond(tab-port) {
+        padding: 0;
+    }
+}
+
+::selection {
+    background-color: $color-primary;
+    color: $color-white;
+}
